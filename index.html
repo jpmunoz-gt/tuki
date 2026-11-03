@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="es-GT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tuki | Tu tuki, al toque</title>
+<meta name="description" content="Créditos de Q300 a Q5,000 para tu negocio. Pedilo desde el celular y sabé cuánto vas a pagar antes de aceptar.">
+<meta name="theme-color" content="#5B2EFF">
+<meta property="og:title" content="tuki | Tu tuki, al toque">
+<meta property="og:description" content="Créditos de Q300 a Q5,000 para tu negocio, desde el celular y sin cobros escondidos.">
+<meta property="og:type" content="website">
+<!-- Verificación de dominio de Meta: pegá aquí la etiqueta que te da el Business Manager -->
+<!-- <meta name="facebook-domain-verification" content="CODIGO_DE_META" /> -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+  /* ===== CONFIGURACIÓN: llená estos dos valores cuando los tengás ===== */
+  window.TUKI_CONFIG = {
+    PIXEL_ID: '',     // ID del Pixel de Meta (solo números), ej. '123456789012345'
+    SHEETS_URL: ''    // URL de la app web de Google Apps Script (termina en /exec)
+  };
+</script>
+
+<!-- Meta Pixel: solo se carga si hay un PIXEL_ID configurado arriba -->
+<script>
+  (function (id) {
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id);
+    fbq('track', 'PageView');
+  })(window.TUKI_CONFIG.PIXEL_ID);
+</script>
+
+<style>
+  :root {
+    --morado: #5B2EFF;
+    --morado-osc: #4521DB;
+    --coral: #FF6B57;
+    --coral-osc: #F25440;
+    --tinta: #1A1433;
+    --tinta-suave: #5E5873;
+    --lavanda: #F3F2FC;
+    --lavanda-2: #E6E3FA;
+    --blanco: #FFFFFF;
+    --error: #C42B1C;
+    --radio: 28px;
+    --sombra: 0 24px 60px -20px rgba(26, 20, 51, .45);
+    --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--tinta);
+    background: var(--lavanda);
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; }
+  h1, h2, h3 { line-height: 1.05; letter-spacing: -0.035em; margin: 0; font-weight: 800; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Logo ---------- */
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 28px; letter-spacing: -0.04em; }
+  .logo svg { width: 40px; height: 40px; }
+  .logo--claro { color: var(--blanco); --logo-bg: var(--coral); --logo-t: var(--tinta); }
+  .logo--oscuro { color: var(--tinta); --logo-bg: var(--morado); --logo-t: var(--blanco); }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 56px; padding: 14px 28px;
+    border: 0; border-radius: 999px;
+    font: inherit; font-weight: 700; font-size: 18px; text-decoration: none;
+    cursor: pointer; transition: transform .15s ease, background-color .15s ease;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-primario { background: var(--morado); color: var(--blanco); width: 100%; }
+  .btn-primario:hover { background: var(--morado-osc); }
+  .btn-coral { background: var(--coral); color: var(--tinta); }
+  .btn-coral:hover { background: var(--coral-osc); }
+  .btn-tinta { background: var(--tinta); color: var(--blanco); }
+  .btn-tinta:hover { background: #2C2450; }
+  .btn[disabled] { opacity: .7; cursor: progress; }
+  .link-btn { background: none; border: 0; padding: 4px; font: inherit; font-weight: 700; color: var(--morado); text-decoration: underline; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--morado);
+    color: var(--blanco);
+    padding: 18px 0 56px;
+    position: relative;
+    overflow: hidden;
+    scroll-margin-top: 0;
+  }
+  .hero::before, .hero::after {
+    content: ""; position: absolute; border-radius: 50%; pointer-events: none;
+  }
+  .hero::before { width: 520px; height: 520px; right: -220px; top: -180px; background: rgba(255,255,255,.06); }
+  .hero::after { width: 300px; height: 300px; left: -160px; bottom: -140px; background: rgba(255,107,87,.18); }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; position: relative; z-index: 1; }
+  .hero-grid { display: grid; gap: 18px; position: relative; z-index: 1; }
+  .eyebrow { display: inline-block; }
+  .resaltado {
+    display: inline; background: var(--coral); color: var(--tinta);
+    padding: 2px 10px; border-radius: 8px;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    font-weight: 800;
+  }
+  .eyebrow .resaltado { font-size: 18px; letter-spacing: -0.02em; }
+  .hero h1 { font-size: clamp(40px, 11vw, 72px); margin-top: 12px; }
+  .hero .lead { margin-top: 12px; font-size: 17px; color: rgba(255,255,255,.92); max-width: 30em; }
+  .hero .lead strong { color: var(--blanco); }
+  .hero-puntos { display: none; }
+
+  /* ---------- Tarjeta simulador / formulario ---------- */
+  .card {
+    background: var(--blanco); color: var(--tinta);
+    border-radius: var(--radio); box-shadow: var(--sombra);
+    padding: 22px 20px 20px;
+  }
+  .paso-indicador { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .06em; }
+  .barra-pasos { display: flex; gap: 6px; }
+  .barra-pasos span { width: 26px; height: 6px; border-radius: 3px; background: var(--lavanda-2); }
+  .barra-pasos span.activo { background: var(--morado); }
+  .card-label { margin-top: 14px; font-size: 18px; font-weight: 600; color: var(--tinta-suave); }
+  .monto { display: block; font-size: clamp(52px, 15vw, 68px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-top: 4px; }
+
+  .slider { margin-top: 12px; }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 36px; background: transparent; margin: 0; cursor: pointer;
+    --pct: 40%;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 10px; border-radius: 5px;
+    background: linear-gradient(to right, var(--morado) 0 var(--pct), var(--lavanda-2) var(--pct) 100%);
+  }
+  input[type=range]::-moz-range-track { height: 10px; border-radius: 5px; background: var(--lavanda-2); }
+  input[type=range]::-moz-range-progress { height: 10px; border-radius: 5px; background: var(--morado); }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 32px; height: 32px; margin-top: -11px; border-radius: 50%;
+    background: var(--coral); border: 4px solid var(--tinta);
+    box-shadow: 0 4px 10px rgba(26,20,51,.25);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--coral); border: 4px solid var(--tinta);
+  }
+  input[type=range]:focus-visible { outline: none; }
+  input[type=range]:focus-visible::-webkit-slider-thumb { outline: 3px solid var(--coral); outline-offset: 3px; }
+  .rango-etiquetas { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: var(--tinta-suave); margin-top: 2px; }
+  .escalones { display: flex; justify-content: space-between; padding: 0 14px; margin-top: -4px; }
+  .escalones span { width: 4px; height: 4px; border-radius: 50%; background: var(--tinta-suave); opacity: .5; }
+
+  .resumen { margin: 14px 0 0; padding: 14px 16px; background: var(--lavanda); border-radius: 18px; display: grid; gap: 8px; }
+  .resumen div { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .resumen dt { color: var(--tinta-suave); font-size: 15px; }
+  .resumen dd { margin: 0; font-weight: 700; font-size: 15px; text-align: right; }
+  .resumen .total { border-top: 1px dashed #C9C4E8; padding-top: 10px; margin-top: 2px; }
+  .resumen .total dt { color: var(--tinta); font-weight: 700; font-size: 16px; }
+  .resumen .total dd { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .nota { font-size: 13px; color: var(--tinta-suave); margin: 12px 0 0; }
+  #ir-paso2 { margin-top: 16px; }
+  .nota strong { color: var(--tinta); }
+
+  .chip-resumen {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    margin-top: 14px; padding: 10px 14px; border-radius: 14px; background: var(--lavanda);
+    font-size: 15px; font-weight: 700;
+  }
+  .form-titulo { font-size: 28px; margin-top: 16px; }
+  .form-titulo:focus { outline: none; }
+  .form-sub { color: var(--tinta-suave); font-size: 15px; margin-top: 4px; }
+  .campo { margin-top: 14px; }
+  .campo label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .campo input, .campo select {
+    width: 100%; min-height: 54px; padding: 12px 16px;
+    font: inherit; font-size: 17px; color: var(--tinta);
+    background: var(--blanco); border: 2px solid #D4D0EA; border-radius: 14px;
+    transition: border-color .15s ease;
+  }
+  .campo select {
+    -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%231A1433' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px;
+  }
+  .campo input:focus, .campo select:focus { border-color: var(--morado); outline: none; box-shadow: 0 0 0 4px rgba(91,46,255,.15); }
+  .campo input[aria-invalid=true], .campo select[aria-invalid=true] { border-color: var(--error); }
+  .campo .ayuda { font-size: 13px; color: var(--tinta-suave); margin-top: 4px; }
+  .error-msg { font-size: 14px; color: var(--error); font-weight: 600; margin-top: 6px; }
+  .error-msg:empty { display: none; }
+  .check { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.45; color: var(--tinta-suave); cursor: pointer; }
+  .check input { width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: var(--morado); cursor: pointer; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-estado { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--error); }
+  .form-estado:empty { display: none; }
+  #enviar { margin-top: 18px; }
+
+  .exito { text-align: center; padding: 20px 4px 8px; }
+  .exito-icono { width: 72px; height: 72px; margin: 4px auto 14px; border-radius: 50%; background: var(--lavanda); display: grid; place-items: center; }
+  .exito h2 { font-size: 30px; }
+  .exito h2:focus { outline: none; }
+  .exito p { margin-top: 10px; color: var(--tinta-suave); }
+  .exito .aviso-exito { font-size: 13px; margin-top: 16px; padding: 10px 12px; background: var(--lavanda); border-radius: 12px; }
+
+  .confianza { list-style: none; padding: 14px 0 0; margin: 16px 0 0; border-top: 1px solid var(--lavanda-2); display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .confianza li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-size: 12px; font-weight: 600; line-height: 1.25; color: var(--tinta-suave); }
+  .confianza svg { width: 22px; height: 22px; color: var(--morado); }
+
+  /* ---------- Secciones ---------- */
+  section.bloque { padding: 64px 0; }
+  .titulo-seccion { font-size: clamp(32px, 8vw, 48px); max-width: 16em; }
+  .sub-seccion { margin-top: 12px; color: var(--tinta-suave); font-size: 17px; max-width: 34em; }
+  .cta-seccion { margin-top: 28px; }
+
+  .pilares-grid { display: grid; gap: 14px; margin-top: 28px; }
+  .pilar { background: var(--blanco); border-radius: 22px; padding: 22px; }
+  .pilar-icono { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 14px; }
+  .pilar-icono svg { width: 28px; height: 28px; }
+  .pilar:nth-child(1) .pilar-icono { background: var(--morado); color: var(--blanco); }
+  .pilar:nth-child(2) .pilar-icono { background: var(--coral); color: var(--tinta); }
+  .pilar:nth-child(3) .pilar-icono { background: var(--tinta); color: var(--blanco); }
+  .pilar h3 { font-size: 24px; }
+  .pilar p { margin-top: 8px; color: var(--tinta-suave); }
+
+  .pasos { background: var(--blanco); }
+  .pasos-lista { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; counter-reset: paso; }
+  .pasos-lista li { display: flex; gap: 16px; align-items: flex-start; padding: 18px; border-radius: 20px; background: var(--lavanda); counter-increment: paso; }
+  .pasos-lista li::before {
+    content: counter(paso); flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+    background: var(--morado); color: var(--blanco); font-weight: 800; font-size: 20px;
+  }
+  .pasos-lista h3 { font-size: 20px; letter-spacing: -0.02em; }
+  .pasos-lista p { color: var(--tinta-suave); margin-top: 4px; font-size: 16px; }
+
+  .escalera { background: var(--tinta); color: var(--blanco); }
+  .escalera .sub-seccion { color: rgba(255,255,255,.78); }
+  .escalones-grafico { display: flex; align-items: flex-end; gap: 6px; height: 260px; margin-top: 36px; padding: 0; list-style: none; }
+  .escalones-grafico li { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; height: 100%; min-width: 0; }
+  .escalon-monto { font-weight: 800; font-size: clamp(11px, 3.3vw, 18px); text-align: center; letter-spacing: -0.03em; margin-bottom: 6px; white-space: nowrap; }
+  .escalon-barra { border-radius: 12px 12px 4px 4px; background: var(--morado); display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; font-size: clamp(11px, 3vw, 15px); font-weight: 700; }
+  .escalones-grafico li:last-child .escalon-barra { background: var(--coral); color: var(--tinta); }
+  .escalon-plazo { text-align: center; font-size: clamp(10px, 2.7vw, 13px); color: rgba(255,255,255,.7); margin-top: 8px; line-height: 1.2; }
+  .leyenda-escalera { margin-top: 18px; font-size: 14px; color: rgba(255,255,255,.7); }
+
+  .faq-lista { margin-top: 28px; display: grid; gap: 10px; }
+  .faq-lista details { background: var(--blanco); border-radius: 18px; padding: 0 20px; }
+  .faq-lista summary {
+    list-style: none; cursor: pointer; padding: 18px 32px 18px 0; position: relative;
+    font-weight: 700; font-size: 17px;
+  }
+  .faq-lista summary::-webkit-details-marker { display: none; }
+  .faq-lista summary::after {
+    content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    width: 28px; height: 28px; border-radius: 50%; background: var(--lavanda);
+    display: grid; place-items: center; font-size: 20px; font-weight: 700; color: var(--morado);
+  }
+  .faq-lista details[open] summary::after { content: "–"; }
+  .faq-lista details p { padding: 0 0 18px; color: var(--tinta-suave); }
+
+  .cta-final { background: var(--coral); text-align: center; }
+  .cta-final .titulo-seccion { margin: 0 auto; }
+  .cta-final p { margin: 12px auto 0; max-width: 28em; }
+
+  footer { background: var(--tinta); color: rgba(255,255,255,.75); padding: 40px 0 48px; font-size: 14px; }
+  footer .aviso { margin-top: 18px; padding: 16px; border: 1px solid rgba(255,255,255,.18); border-radius: 14px; }
+  footer .aviso strong { color: var(--blanco); }
+  footer .legal { margin-top: 14px; }
+  footer .copy { margin-top: 18px; color: rgba(255,255,255,.55); }
+
+  /* ---------- Escritorio ---------- */
+  @media (min-width: 900px) {
+    body { font-size: 18px; }
+    .hero { padding: 28px 0 88px; }
+    .topbar { margin-bottom: 56px; }
+    .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+    .hero .lead { font-size: 20px; margin-top: 20px; }
+    .eyebrow .resaltado { font-size: 22px; }
+    .hero-puntos { display: grid; gap: 12px; list-style: none; padding: 0; margin: 28px 0 0; font-weight: 600; }
+    .hero-puntos li { display: flex; gap: 12px; align-items: center; }
+    .hero-puntos svg { width: 26px; height: 26px; color: var(--coral); flex-shrink: 0; }
+    .card { padding: 28px; }
+    section.bloque { padding: 96px 0; }
+    .pilares-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pasos-lista { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pasos-lista li { flex-direction: column; padding: 24px; }
+    .escalones-grafico { height: 340px; gap: 14px; }
+    .faq-lista { max-width: 820px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Símbolo del logo (se reutiliza en todo el sitio) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tuki-simbolo" viewBox="0 0 1024 1024">
+    <path style="fill: var(--logo-bg)" d="M0 340A340 340 0 0 1 340 0H684A340 340 0 0 1 1024 340V684A340 340 0 0 1 684 1024H80A80 80 0 0 1 0 944Z"/>
+    <path style="fill: var(--logo-t)" d="M415 228H537V332H648V429H537V575C537 610 557 630 595 630H648V742H590C460 742 413 700 413 575V429H356V332H415Z"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+
+<main>
+  <!-- ============ HERO: simulador + formulario ============ -->
+  <section class="hero" id="simulador" aria-labelledby="titulo-hero">
+    <div class="wrap">
+      <header class="topbar">
+        <span class="logo logo--claro" aria-label="tuki">
+          <svg aria-hidden="true"><use href="#tuki-simbolo"/></svg>
+          <span aria-hidden="true">tuki</span>
+        </span>
+      </header>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="resaltado">¿Corto de pisto?</span></p>
+          <h1 id="titulo-hero">Tu tuki, al&nbsp;toque.</h1>
+          <p class="lead">Créditos de Q300 a Q5,000 para tu negocio. Sabés cuánto vas a pagar <strong>antes</strong> de aceptar.</p>
+          <ul class="hero-puntos">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Sin filas ni papeleo</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Sin cobros escondidos</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Sin amenazas ni acceso a tus contactos</li>
+          </ul>
+        </div>
+
+        <div class="card" id="tarjeta">
+          <div class="paso-indicador">
+            <span id="texto-paso">Paso 1 de 2</span>
+            <span class="barra-pasos" aria-hidden="true"><span class="activo"></span><span id="barra-2"></span></span>
+          </div>
+
+          <!-- Paso 1: simulador -->
+          <div id="paso1">
+            <p class="card-label" id="lbl-monto">¿Cuánto necesitás?</p>
+            <output class="monto" id="monto" for="slider" aria-live="polite">Q1,000</output>
+            <div class="slider">
+              <input type="range" id="slider" min="0" max="5" step="1" value="2" aria-labelledby="lbl-monto" aria-valuetext="Q1,000">
+              <div class="escalones" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="rango-etiquetas" aria-hidden="true"><span>Q300</span><span>Q5,000</span></div>
+            </div>
+            <dl class="resumen">
+              <div><dt>Plazo</dt><dd id="r-plazo">2 meses</dd></div>
+              <div><dt>Pagos</dt><dd id="r-pagos">2 cuotas de Q550</dd></div>
+              <div><dt>Costo</dt><dd id="r-costo">Q100 (5% mensual)</dd></div>
+              <div class="total"><dt>Total a pagar</dt><dd id="r-total">Q1,100</dd></div>
+            </dl>
+            <button type="button" class="btn btn-primario" id="ir-paso2">Pedí tu tuki</button>
+            <p class="nota">Lo que ves es lo que pagás: sin comisiones ni cobros escondidos. <strong>Tu primer tuki es desde Q300.</strong> Pagá a tiempo y subí de nivel.</p>
+          </div>
+
+          <!-- Paso 2: datos -->
+          <form id="paso2" hidden novalidate>
+            <div class="chip-resumen">
+              <span id="chip">Q1,000 · 2 meses · Total Q1,100</span>
+              <button type="button" class="link-btn" id="volver">Cambiar monto</button>
+            </div>
+            <h2 class="form-titulo" id="titulo-form" tabindex="-1">Dejanos tus datos</h2>
+            <p class="form-sub">Te toma menos de un minuto.</p>
+
+            <div class="campo">
+              <label for="nombre">Tu nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" required maxlength="80" aria-describedby="err-nombre">
+              <p class="error-msg" id="err-nombre"></p>
+            </div>
+            <div class="campo">
+              <label for="celular">Tu celular</label>
+              <input id="celular" name="celular" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="5555 1234" required maxlength="14" aria-describedby="ayuda-celular err-celular">
+              <p class="ayuda" id="ayuda-celular">8 dígitos. Te contactamos por llamada o WhatsApp.</p>
+              <p class="error-msg" id="err-celular"></p>
+            </div>
+            <div class="campo">
+              <label for="negocio">¿Qué tipo de negocio tenés?</label>
+              <select id="negocio" name="negocio" required aria-describedby="err-negocio">
+                <option value="">Elegí una opción</option>
+                <option>Tienda de barrio</option>
+                <option>Tortillería</option>
+                <option>Comedor</option>
+                <option>Puesto de mercado</option>
+                <option>Taller</option>
+                <option>Trabajo independiente o emprendimiento</option>
+                <option>Otro</option>
+              </select>
+              <p class="error-msg" id="err-negocio"></p>
+            </div>
+
+            <!-- Campo trampa para bots: las personas no lo ven -->
+            <div class="hp" aria-hidden="true">
+              <label for="website">No llenar</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <label class="check">
+              <input type="checkbox" id="acepta" name="acepta" required aria-describedby="err-acepta">
+              <span>Acepto que tuki me contacte sobre mi solicitud. Mis datos solo se usan para eso.</span>
+            </label>
+            <p class="error-msg" id="err-acepta"></p>
+
+            <button type="submit" class="btn btn-primario" id="enviar">Enviar mi solicitud</button>
+            <p class="form-estado" id="estado" role="alert"></p>
+          </form>
+
+          <!-- Paso 3: confirmación -->
+          <div id="paso3" class="exito" hidden>
+            <div class="exito-icono"><svg width="38" height="38" style="color: var(--morado)" aria-hidden="true"><use href="#i-check"/></svg></div>
+            <h2 id="titulo-exito" tabindex="-1">¡Listo!</h2>
+            <p id="texto-exito">Recibimos tus datos.</p>
+            <p class="aviso-exito">tuki es un proyecto académico de una clase de Social Media. No se otorgarán créditos reales y nadie te va a cobrar nada.</p>
+          </div>
+
+          <ul class="confianza">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>En minutos</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>Costo visible</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z M9 12l2 2 4-4"/></svg>Sin acceso a contactos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PILARES ============ -->
+  <section class="bloque" aria-labelledby="titulo-pilares">
+    <div class="wrap">
+      <h2 class="titulo-seccion" id="titulo-pilares">Un crédito claro, rápido y con respeto.</h2>
+      <p class="sub-seccion">Sabemos que hay apps caras y prestamistas que te amenazan. tuki es diferente.</p>
+      <div class="pilares-grid">
+        <article class="pilar">
+          <div class="pilar-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <h3>Rápido</h3>
+          <p>Lo pedís en minutos desde tu celular. Sin filas, sin papeleo y sin cerrar tu negocio para ir al banco.</p>
+        </article>
+        <article class="pilar">
+          <div class="pilar-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></div>
+          <h3>Claro</h3>
+          <p>Antes de aceptar ves cuánto vas a pagar en total. Lo que ves es lo que pagás, sin sorpresas.</p>
+        </article>
+        <article class="pilar">
+          <div class="pilar-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z M9 12l2 2 4-4"/></svg></div>
+          <h3>Con respeto</h3>
+          <p>Cobramos sin amenazas y nunca pedimos acceso a los contactos de tu celular.</p>
+        </article>
+      </div>
+      <a href="#simulador" class="btn btn-coral cta-seccion">Pedí tu tuki</a>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO FUNCIONA ============ -->
+  <section class="bloque pasos" aria-labelledby="titulo-pasos">
+    <div class="wrap">
+      <h2 class="titulo-seccion" id="titulo-pasos">Así de fácil.</h2>
+      <ol class="pasos-lista">
+        <li><div><h3>Elegí cuánto</h3><p>Mové el simulador y mirá el plazo y el total a pagar.</p></div></li>
+        <li><div><h3>Llená tu solicitud</h3><p>Solo con tu DPI y tu celular. Sin fiador y sin tarjeta de crédito.</p></div></li>
+        <li><div><h3>Recibí tu tuki</h3><p>El dinero cae directo en tu cuenta para surtir, aprovechar una oferta o cubrir un imprevisto.</p></div></li>
+      </ol>
+      <a href="#simulador" class="btn btn-tinta cta-seccion">Empezar ahora</a>
+    </div>
+  </section>
+
+  <!-- ============ ESCALERA ============ -->
+  <section class="bloque escalera" aria-labelledby="titulo-escalera">
+    <div class="wrap">
+      <h2 class="titulo-seccion" id="titulo-escalera">Pagá a tiempo, subí de nivel.</h2>
+      <p class="sub-seccion">Tu primer tuki es desde Q300. Cada vez que pagás bien, podés pedir más y tu tasa baja.</p>
+      <ol class="escalones-grafico" aria-label="Escalera de montos de tuki">
+        <li><span class="escalon-monto">Q300</span><span class="escalon-barra" style="height:22%">6%</span><span class="escalon-plazo">30 días</span></li>
+        <li><span class="escalon-monto">Q600</span><span class="escalon-barra" style="height:34%">6%</span><span class="escalon-plazo">30 días</span></li>
+        <li><span class="escalon-monto">Q1,000</span><span class="escalon-barra" style="height:46%">5%</span><span class="escalon-plazo">2 meses</span></li>
+        <li><span class="escalon-monto">Q2,000</span><span class="escalon-barra" style="height:58%">5%</span><span class="escalon-plazo">3 meses</span></li>
+        <li><span class="escalon-monto">Q3,500</span><span class="escalon-barra" style="height:70%">4%</span><span class="escalon-plazo">4 meses</span></li>
+        <li><span class="escalon-monto">Q5,000</span><span class="escalon-barra" style="height:82%">4%</span><span class="escalon-plazo">6 meses</span></li>
+      </ol>
+      <p class="leyenda-escalera">Porcentaje = costo mensual fijo sobre el monto. Sin comisión de apertura.</p>
+      <a href="#simulador" class="btn btn-coral cta-seccion">Pedí tu primer tuki</a>
+    </div>
+  </section>
+
+  <!-- ============ PREGUNTAS FRECUENTES ============ -->
+  <section class="bloque" aria-labelledby="titulo-faq">
+    <div class="wrap">
+      <h2 class="titulo-seccion" id="titulo-faq">Preguntas frecuentes</h2>
+      <div class="faq-lista">
+        <details>
+          <summary>¿Qué necesito para pedir mi tuki?</summary>
+          <p>Tu DPI vigente, un celular y una cuenta bancaria a tu nombre donde recibir el dinero. No necesitás tarjeta de crédito, fiador ni historial en el banco.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto me va a costar?</summary>
+          <p>Depende del monto: un costo mensual fijo de 4% a 6% sobre lo que pedís. El simulador te muestra el total exacto antes de aceptar. No hay comisión de apertura ni cobros escondidos.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si me atraso?</summary>
+          <p>Se cobra un cargo fijo de Q25, sin intereses que se acumulen. Te avisamos con respeto: nunca con amenazas ni llamando a tu familia o conocidos.</p>
+        </details>
+        <details>
+          <summary>¿Van a ver los contactos de mi celular?</summary>
+          <p>No. tuki nunca pide acceso a tus contactos, fotos ni mensajes.</p>
+        </details>
+        <details>
+          <summary>¿Cómo subo de nivel?</summary>
+          <p>Pagando a tiempo. Cada crédito que pagás bien te abre el siguiente escalón: Q300, Q600, Q1,000, Q2,000, Q3,500 y hasta Q5,000, con una tasa cada vez más baja.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="bloque cta-final" aria-labelledby="titulo-cta">
+    <div class="wrap">
+      <h2 class="titulo-seccion" id="titulo-cta">¿Te falta tuki para tu negocio?</h2>
+      <p>Pedilo desde tu celular, sin hacer filas.</p>
+      <a href="#simulador" class="btn btn-tinta cta-seccion">Pedí tu tuki</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo logo--claro" aria-label="tuki">
+      <svg aria-hidden="true"><use href="#tuki-simbolo"/></svg>
+      <span aria-hidden="true">tuki</span>
+    </span>
+    <p class="aviso"><strong>Proyecto académico.</strong> tuki es una marca ficticia creada para una clase de Social Media. No es una entidad financiera, no otorga créditos reales y no realiza cobros.</p>
+    <p class="legal">Los datos que dejás en el formulario se usan solo para este ejercicio de clase, no se comparten con terceros y se eliminan al terminar el curso.</p>
+    <p class="copy">© 2026 tuki · Tu tuki, al toque.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var CONFIG = window.TUKI_CONFIG || {};
+
+  // Escalera de montos: plazo en meses, tasa mensual fija (%) y número de pagos
+  var NIVELES = [
+    { monto: 300,  meses: 1, plazo: '30 días', tasa: 6, pagos: 1 },
+    { monto: 600,  meses: 1, plazo: '30 días', tasa: 6, pagos: 1 },
+    { monto: 1000, meses: 2, plazo: '2 meses', tasa: 5, pagos: 2 },
+    { monto: 2000, meses: 3, plazo: '3 meses', tasa: 5, pagos: 3 },
+    { monto: 3500, meses: 4, plazo: '4 meses', tasa: 4, pagos: 4 },
+    { monto: 5000, meses: 6, plazo: '6 meses', tasa: 4, pagos: 6 }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function q(n) {
+    var r = Math.round(n * 100) / 100;
+    var dec = r % 1 !== 0 ? 2 : 0;
+    return 'Q' + r.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  }
+
+  function calcular(i) {
+    var n = NIVELES[i];
+    var costo = n.monto * n.tasa / 100 * n.meses;
+    var total = n.monto + costo;
+    return {
+      monto: n.monto, plazo: n.plazo, tasa: n.tasa, pagos: n.pagos,
+      costo: costo, total: total, cuota: total / n.pagos
+    };
+  }
+
+  // ---------- Pixel ----------
+  function track(evento, params, personalizado) {
+    if (typeof window.fbq !== 'function') return;
+    window.fbq(personalizado ? 'trackCustom' : 'track', evento, params || {});
+  }
+
+  // ---------- UTMs (para saber de qué anuncio vino cada lead) ----------
+  var CLAVES_UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
+  var utm = {};
+  try {
+    var guardado = JSON.parse(sessionStorage.getItem('tuki_utm') || '{}');
+    var url = new URLSearchParams(location.search);
+    CLAVES_UTM.forEach(function (k) { utm[k] = url.get(k) || guardado[k] || ''; });
+    sessionStorage.setItem('tuki_utm', JSON.stringify(utm));
+  } catch (e) {
+    CLAVES_UTM.forEach(function (k) { utm[k] = ''; });
+  }
+
+  // ---------- Simulador ----------
+  var slider = $('slider');
+  var actual = calcular(+slider.value);
+  var simuladorUsado = false;
+
+  function pintar() {
+    actual = calcular(+slider.value);
+    var pct = (slider.value / slider.max) * 100;
+    slider.style.setProperty('--pct', pct + '%');
+    slider.setAttribute('aria-valuetext', q(actual.monto) + ', total a pagar ' + q(actual.total));
+    $('monto').textContent = q(actual.monto);
+    $('r-plazo').textContent = actual.plazo;
+    $('r-pagos').textContent = actual.pagos === 1 ? '1 solo pago' : actual.pagos + ' cuotas de ' + q(actual.cuota);
+    $('r-costo').textContent = q(actual.costo) + ' (' + actual.tasa + '% mensual)';
+    $('r-total').textContent = q(actual.total);
+    $('chip').textContent = q(actual.monto) + ' · ' + actual.plazo + ' · Total ' + q(actual.total);
+  }
+
+  slider.addEventListener('input', function () {
+    pintar();
+    if (!simuladorUsado) { simuladorUsado = true; track('UsoSimulador', {}, true); }
+  });
+  pintar();
+
+  // ---------- Navegación entre pasos ----------
+  function mostrarPaso(n) {
+    $('paso1').hidden = n !== 1;
+    $('paso2').hidden = n !== 2;
+    $('paso3').hidden = n !== 3;
+    $('texto-paso').textContent = n === 3 ? 'Solicitud enviada' : 'Paso ' + n + ' de 2';
+    $('barra-2').className = n >= 2 ? 'activo' : '';
+  }
+
+  $('ir-paso2').addEventListener('click', function () {
+    mostrarPaso(2);
+    track('PasoDatos', { monto: actual.monto }, true);
+    $('nombre').focus();
+  });
+  $('volver').addEventListener('click', function () {
+    mostrarPaso(1);
+    slider.focus();
+  });
+
+  // Los botones "Pedí tu tuki" de abajo regresan al simulador
+  document.querySelectorAll('a[href="#simulador"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(function () {
+        var destino = !$('paso2').hidden ? $('nombre') : (!$('paso1').hidden ? slider : null);
+        if (destino) destino.focus({ preventScroll: true });
+      }, 400);
+    });
+  });
+
+  // ---------- Validación ----------
+  function limpiarCelular(v) {
+    var d = (v || '').replace(/\D/g, '');
+    if (d.length === 11 && d.indexOf('502') === 0) d = d.slice(3);
+    return d;
+  }
+
+  function marcar(campo, mensaje) {
+    var el = $(campo);
+    var err = $('err-' + campo);
+    if (mensaje) { el.setAttribute('aria-invalid', 'true'); err.textContent = mensaje; }
+    else { el.removeAttribute('aria-invalid'); err.textContent = ''; }
+    return !mensaje;
+  }
+
+  function validar() {
+    var ok = true, primero = null;
+    var reglas = [
+      ['nombre', $('nombre').value.trim().length < 2 ? 'Escribí tu nombre.' : ''],
+      ['celular', /^[2-7]\d{7}$/.test(limpiarCelular($('celular').value)) ? '' : 'Escribí un número de 8 dígitos, por ejemplo 5555 1234.'],
+      ['negocio', $('negocio').value ? '' : 'Elegí el tipo de negocio.'],
+      ['acepta', $('acepta').checked ? '' : 'Necesitamos tu permiso para contactarte.']
+    ];
+    reglas.forEach(function (r) {
+      if (!marcar(r[0], r[1])) { ok = false; if (!primero) primero = $(r[0]); }
+    });
+    if (primero) primero.focus();
+    return ok;
+  }
+
+  ['nombre', 'celular', 'negocio', 'acepta'].forEach(function (id) {
+    $(id).addEventListener('change', function () {
+      if ($(id).getAttribute('aria-invalid') === 'true') validar();
+    });
+  });
+
+  // ---------- Envío ----------
+  $('paso2').addEventListener('submit', function (e) {
+    e.preventDefault();
+    $('estado').textContent = '';
+    if (!validar()) return;
+
+    var nombre = $('nombre').value.trim();
+    var datos = new URLSearchParams({
+      nombre: nombre,
+      celular: limpiarCelular($('celular').value),
+      negocio: $('negocio').value,
+      monto: actual.monto,
+      plazo: actual.plazo,
+      total: actual.total.toFixed(2),
+      acepta: 'Sí',
+      website: $('website').value
+    });
+    CLAVES_UTM.forEach(function (k) { datos.append(k, utm[k] || ''); });
+
+    var boton = $('enviar');
+    boton.disabled = true;
+    boton.textContent = 'Enviando…';
+
+    var envio = CONFIG.SHEETS_URL
+      ? fetch(CONFIG.SHEETS_URL, { method: 'POST', mode: 'no-cors', body: datos })
+      : Promise.resolve(console.warn('[tuki] SHEETS_URL vacío: el lead no se guardó.', Object.fromEntries(datos)));
+
+    envio.then(function () {
+      track('Lead', { content_name: 'Solicitud tuki', currency: 'GTQ', monto: actual.monto });
+      $('titulo-exito').textContent = '¡Listo, ' + nombre.split(' ')[0] + '!';
+      $('texto-exito').textContent = 'Recibimos tu solicitud de ' + q(actual.monto) + '.';
+      mostrarPaso(3);
+      $('titulo-exito').focus();
+    }).catch(function () {
+      $('estado').textContent = 'No pudimos enviar tus datos. Revisá tu conexión e intentá de nuevo.';
+      boton.disabled = false;
+      boton.textContent = 'Enviar mi solicitud';
+    });
+  });
+})();
+</script>
+</body>
+</html>
