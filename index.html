@@ -18,11 +18,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script>
-  /* ===== CONFIGURACIÓN: llená estos dos valores cuando los tengás ===== */
+  /* ===== CONFIGURACIÓN: llená estos valores cuando los tengás ===== */
   window.TUKI_CONFIG = {
     PIXEL_ID: '',     // ID del Pixel de Meta (solo números), ej. '123456789012345'
-    SHEETS_URL: ''    // URL de la app web de Google Apps Script (termina en /exec)
+    GA_ID: 'G-31YG6W3GG8',        // ID de medición de Google Analytics 4, ej. 'G-ABC123XYZ9'
+    SHEETS_URL: 'https://script.google.com/macros/s/AKfycbxgiOeLY_2Dr9iA7uadf3stn3AwoFgQO19tEUswkFN-zeGtnnb4LLYqWS5NMxOAou89uA/exec'    // URL de la app web de Google Apps Script (termina en /exec)
   };
+</script>
+
+<!-- Google Analytics 4: solo se carga si hay un GA_ID configurado arriba -->
+<script>
+  (function (id) {
+    if (!id) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', id);
+  })(window.TUKI_CONFIG.GA_ID);
 </script>
 
 <!-- Meta Pixel: solo se carga si hay un PIXEL_ID configurado arriba -->
@@ -538,7 +554,7 @@
       <span aria-hidden="true">tuki</span>
     </span>
     <p class="aviso"><strong>Proyecto académico.</strong> tuki es una marca ficticia creada para una clase de Social Media. No es una entidad financiera, no otorga créditos reales y no realiza cobros.</p>
-    <p class="legal">Los datos que dejás en el formulario se usan solo para este ejercicio de clase, no se comparten con terceros y se eliminan al terminar el curso.</p>
+    <p class="legal">Los datos que dejás en el formulario se usan solo para este ejercicio de clase, no se comparten con terceros y se eliminan al terminar el curso. Para medir las visitas usamos Google Analytics y el Pixel de Meta.</p>
     <p class="copy">© 2026 tuki · Tu tuki, al toque.</p>
   </div>
 </footer>
@@ -575,10 +591,17 @@
     };
   }
 
-  // ---------- Pixel ----------
+  // ---------- Pixel y Google Analytics ----------
+  // Nombre de cada evento en GA4 (minúsculas con guion bajo, como pide Google)
+  var EVENTOS_GA = { UsoSimulador: 'uso_simulador', PasoDatos: 'paso_datos', Lead: 'generate_lead' };
+
   function track(evento, params, personalizado) {
-    if (typeof window.fbq !== 'function') return;
-    window.fbq(personalizado ? 'trackCustom' : 'track', evento, params || {});
+    if (typeof window.fbq === 'function') {
+      window.fbq(personalizado ? 'trackCustom' : 'track', evento, params || {});
+    }
+    if (typeof window.gtag === 'function' && EVENTOS_GA[evento]) {
+      window.gtag('event', EVENTOS_GA[evento], params || {});
+    }
   }
 
   // ---------- UTMs (para saber de qué anuncio vino cada lead) ----------
