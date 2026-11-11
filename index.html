@@ -193,7 +193,7 @@
   .resumen .total dt { color: var(--tinta); font-weight: 700; font-size: 16px; }
   .resumen .total dd { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
   .nota { font-size: 13px; color: var(--tinta-suave); margin: 12px 0 0; }
-  #ir-paso2 { margin-top: 16px; }
+  #inicio_form { margin-top: 16px; }
   .nota strong { color: var(--tinta); }
 
   .chip-resumen {
@@ -227,7 +227,7 @@
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .form-estado { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--error); }
   .form-estado:empty { display: none; }
-  #enviar { margin-top: 18px; }
+  #envio_form { margin-top: 18px; }
 
   .exito { text-align: center; padding: 20px 4px 8px; }
   .exito-icono { width: 72px; height: 72px; margin: 4px auto 14px; border-radius: 50%; background: var(--lavanda); display: grid; place-items: center; }
@@ -378,7 +378,7 @@
               <div><dt>Costo</dt><dd id="r-costo">Q100 (5% mensual)</dd></div>
               <div class="total"><dt>Total a pagar</dt><dd id="r-total">Q1,100</dd></div>
             </dl>
-            <button type="button" class="btn btn-primario" id="ir-paso2">Pedí tu tuki</button>
+            <button type="button" class="btn btn-primario" id="inicio_form">Pedí tu tuki</button>
             <p class="nota">Lo que ves es lo que pagás: sin comisiones ni cobros escondidos. <strong>Tu primer tuki es desde Q300.</strong> Pagá a tiempo y subí de nivel.</p>
           </div>
 
@@ -429,7 +429,7 @@
             </label>
             <p class="error-msg" id="err-acepta"></p>
 
-            <button type="submit" class="btn btn-primario" id="enviar">Enviar mi solicitud</button>
+            <button type="submit" class="btn btn-primario" id="envio_form">Enviar mi solicitud</button>
             <p class="form-estado" id="estado" role="alert"></p>
           </form>
 
@@ -597,7 +597,8 @@
 
   function track(evento, params, personalizado) {
     if (typeof window.fbq === 'function') {
-      window.fbq(personalizado ? 'trackCustom' : 'track', evento, params || {});
+      // A Meta no se le manda el monto: su política prohíbe compartir información financiera
+      window.fbq(personalizado ? 'trackCustom' : 'track', evento, evento === 'Lead' ? { content_name: 'Solicitud tuki' } : {});
     }
     if (typeof window.gtag === 'function' && EVENTOS_GA[evento]) {
       window.gtag('event', EVENTOS_GA[evento], params || {});
@@ -649,7 +650,7 @@
     $('barra-2').className = n >= 2 ? 'activo' : '';
   }
 
-  $('ir-paso2').addEventListener('click', function () {
+  $('inicio_form').addEventListener('click', function () {
     mostrarPaso(2);
     track('PasoDatos', { monto: actual.monto }, true);
     $('nombre').focus();
@@ -724,7 +725,7 @@
     });
     CLAVES_UTM.forEach(function (k) { datos.append(k, utm[k] || ''); });
 
-    var boton = $('enviar');
+    var boton = $('envio_form');
     boton.disabled = true;
     boton.textContent = 'Enviando…';
 
